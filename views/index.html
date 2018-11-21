@@ -41,6 +41,15 @@
         <li>When I submit something, I will receive the file name, and size in bytes within the JSON response</li>
       </ol>
       
+      <h2>
+        Please Upload a file...
+      </h2>
+      
+      <form enctype="multipart/form-data" method="POST" action="/api/fileanalyse" />
+        <input id="inputfield" type="file" name="upfile" value="Choose a file" />
+        <input type="submit" />
+      </form>
+      
     </main>
     <footer>
       Made with <a href="https://glitch.com">Glitch</a>!
