@@ -20,12 +20,15 @@ app.get('/', function(request, response) {
 
 
 app.post('/api/fileanalyse', (req, res) => {
-  console.log("files: ", req.files.upfile);
-  res.json({
-    name: req.files.upfile.name,
-    type: req.files.upfile.type,
-    size: req.files.upfile.size
-  });
+  if (req.files.upfile.name) {
+    res.json({
+      name: req.files.upfile.name,
+      type: req.files.upfile.type,
+      size: req.files.upfile.size
+    });
+  } else {
+    res.status(401).send('please upload a file');
+  }
 });
 
 // listen for requests :)
