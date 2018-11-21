@@ -19,8 +19,16 @@ app.get('/', function(request, response) {
 
 
 app.post('/api/fileanalyse', (req, res) => {
-  let form = new formidable.incomingForm();
+  new formidable.incomingForm().parse(req, (err, fields, files) => {
+    if (err) {
+      res.send(err)
+    }
+    console.log(fields);
+    console.log(files);
+    res.send('file recvd');
+  });
   
+  res.send('file rcvd');
 });
 
 // listen for requests :)
