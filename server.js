@@ -1,27 +1,26 @@
+// -- USEFUL LINKS = https://flaviocopes.com/express-forms-files/
+
+
 // server.js
 // where your node app starts
 
 // init project
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser');
+const formidable = require('formidable');
 
-// we've started you off with Express, 
-// but feel free to use whatever libs or frameworks you'd like through `package.json`.
-
-// http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
 
-app.use(bodyParser.urlencoded({extended: false}));
 
 // http://expressjs.com/en/starter/basic-routing.html
 app.get('/', function(request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
 
+
 app.post('/api/fileanalyse', (req, res) => {
-  console.log(req.body);
-  res.send('file recvd');
+  let form = new formidable.incomingForm();
+  
 });
 
 // listen for requests :)
