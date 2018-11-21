@@ -7,9 +7,10 @@
 // init project
 const express = require('express');
 const app = express();
-const formidable = require('formidable');
+const formidableMiddleware  = require('express-formidable');
 
 app.use(express.static('public'));
+app.use(formidableMiddleware());
 
 
 // http://expressjs.com/en/starter/basic-routing.html
@@ -19,19 +20,17 @@ app.get('/', function(request, response) {
 
 
 app.post('/api/fileanalyse', (req, res) => {
-  new formidable.incomingForm().parse(req, (err, fields, files) => {
-    if (err) {
-      res.send(err)
-    }
-    console.log(fields);
-    console.log(files);
-    res.send('file recvd');
+  console.log("files: ", req.files.upfile);
+  res.json({
+    name: req.files.upfile.name,
+    type: req.files.upfile.type,
+    size: req.files.upfile.size
   });
-  
-  res.send('file rcvd');
 });
 
 // listen for requests :)
-const listener = app.listen(process.env.PORT, function() {
+
+const port = process.env.PORT || 3000;
+const listener = app.listen(port, function() {
   console.log('Your app is listening on port ' + listener.address().port);
 });
